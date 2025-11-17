@@ -1,7 +1,22 @@
-import { Component, computed, Input, input } from '@angular/core';
-import { DUMMY_USERS } from '../dummy-users';
+import { Component, computed, EventEmitter, Input, input, Output } from '@angular/core';
+import { type User } from './user.model';
+// import { DUMMY_USERS } from '../dummy-users';
 
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+// Object type definition
+// type User = {
+//   id: string;
+//   name: string;
+//   avatar: string;
+// }
+
+// interface definition
+// interface User {
+//   id: string;
+//   name: string;
+//   avatar: string;
+// }
+
+// const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
 @Component({
   selector: 'app-user',
@@ -12,10 +27,10 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 })
 export class UserComponent {
   // with Input decorator
-  @Input({required: true}) avatar!: string;
-  @Input({required: true}) name!: string;
+  @Input ({ required: true}) user!: User;
+  @Output() select = new EventEmitter();
 
-  // do not use this method in a lot of places
+  // many do not use this method in a lot of places
   // avatar = input.required<string>();
   // name = input.required<string>();
 
@@ -25,8 +40,10 @@ export class UserComponent {
   // with computed, the imgPath will only be recalculated when this.avatar changes
 
   get imgPath() {
-    return 'assets/users/' + this.avatar;
+    return 'assets/users/' + this.user.avatar;
   }
   
-  onSelectUser() {  }
+  onSelectUser() { 
+    this.select.emit(this.user.id);
+  }
 }
