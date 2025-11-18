@@ -28,6 +28,7 @@ import { type User } from './user.model';
 export class UserComponent {
   // with Input decorator
   @Input ({ required: true}) user!: User;
+  @Input ({ required: true }) selected!: boolean;
   @Output() select = new EventEmitter();
 
   // many do not use this method in a lot of places
