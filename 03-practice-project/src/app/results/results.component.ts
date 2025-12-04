@@ -1,9 +1,10 @@
-import { Component, input, Input } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-results',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './results.component.html',
   styleUrl: './results.component.css'
 })

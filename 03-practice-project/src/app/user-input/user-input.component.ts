@@ -17,10 +17,11 @@ export class UserInputComponent {
   investmentDuration = '10';
 
   onSubmit() {
-    console.log('Form Submitted!');
-    console.log('Initial Investment:', this.initialInvestment);
-    console.log('Annual Investment:', this.annualInvestment);
-    console.log('Expected Return:', this.expectedReturn);
-    console.log('Investment Duration:', this.investmentDuration);
+    this.calculate.emit({
+      initialInvestment: +this.initialInvestment,
+      annualInvestment: +this.annualInvestment,
+      expectedReturn: +this.expectedReturn,
+      investmentDuration: +this.investmentDuration
+    });
   }
 }
