@@ -1,4 +1,4 @@
-import { Component, ElementRef, viewChild, ViewChild } from '@angular/core';
+import { Component, ElementRef, output, ViewChild } from '@angular/core';
 import { ButtonComponent } from "../../../shared/button/button.component";
 import { ControlComponent } from "../../../shared/control/control.component";
 import { FormsModule } from '@angular/forms';
@@ -18,6 +18,12 @@ export class NewTicketComponent {
   // private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
   // "[viewChild.required]" is used to avoid the undefined check
 
+  // @Output() add = new EventEmitter<{title: string; text: string}>();
+  add = output<{title: string; text: string}>();
+
+  enteredTitle = '';
+  enteredText = '';
+
   ngOnInit() {
     console.log('On Init');
     console.log(this.form?.nativeElement);
@@ -28,13 +34,12 @@ export class NewTicketComponent {
     console.log(this.form?.nativeElement);
   }
 
-  onSubmit(titleElement: HTMLInputElement, textElement: string) {
-    // Handle form submission logic here
-    const enteredTitle = titleElement.value;
-    console.log('Submitted Title:', enteredTitle);
-    console.log('Submitted Text:', textElement);
+  onSubmit() {
+    this.add.emit({title: this.enteredTitle, text: this.enteredText})
     
     // this.form().nativeElement.reset();
-    this.form?.nativeElement.reset();
+    // this.form?.nativeElement.reset();
+    this.enteredTitle = '';
+    this.enteredText = '';
   }
 }
