@@ -11,12 +11,22 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './new-ticket.component.css'
 })
 export class NewTicketComponent {
-  // @ViewChild('form') private form?: ElementRef<HTMLFormElement>;
+  @ViewChild('form') private form?: ElementRef<HTMLFormElement>;
   
   // Angular 17.3+
   // using signals
-  private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
+  // private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
   // "[viewChild.required]" is used to avoid the undefined check
+
+  ngOnInit() {
+    console.log('On Init');
+    console.log(this.form?.nativeElement);
+  }
+
+  ngAfterViewInit() {
+    console.log('After View Init');
+    console.log(this.form?.nativeElement);
+  }
 
   onSubmit(titleElement: HTMLInputElement, textElement: string) {
     // Handle form submission logic here
@@ -24,7 +34,7 @@ export class NewTicketComponent {
     console.log('Submitted Title:', enteredTitle);
     console.log('Submitted Text:', textElement);
     
-    // this.form?.nativeElement.reset();
-    this.form().nativeElement.reset();
+    // this.form().nativeElement.reset();
+    this.form?.nativeElement.reset();
   }
 }

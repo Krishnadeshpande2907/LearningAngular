@@ -23,6 +23,12 @@ export class ControlComponent {
   private el = inject(ElementRef);
   // @ContentChild('input') private control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>;
   private control = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');         // signal
+  
+  
+  
+  ngAfterContentInit() {
+    // ...
+  }
 
   onClick() {
     console.log('Control clicked!');
